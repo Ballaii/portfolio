@@ -15,6 +15,9 @@ const projects = [
       "A solo-developed Unity 2D Metroidvania with 20 interconnected areas, 100+ scenes, 15 boss encounters, branching narrative, secure saves, and controller support.",
     stack: ["Unity", "C#", "Behavior graphs", "AES/HMAC saves", "ScriptableObjects"],
     accent: "harvest",
+    image: "assets/project-divine-harvest.webp",
+    imageTitle: "Divine Harvest",
+    imageAlt: "Divine Harvest game logo",
   },
   {
     id: "malware-ai",
@@ -24,6 +27,9 @@ const projects = [
       "A machine learning project for detecting malicious software patterns and improving threat classification workflows.",
     stack: ["Python", "Neural networks", "Cybersecurity", "Data analysis"],
     accent: "neural",
+    image: "assets/project-malware-detection.webp",
+    imageTitle: "AI Malware Detection",
+    imageAlt: "Illustration of malware detection with magnifying glass and computer",
   },
   {
     id: "automation",
@@ -33,15 +39,21 @@ const projects = [
       "SCADA internship work modelling heat flow across rooms, insulation, open-window factors, gas/A/C modes, and monthly energy reports from live process data.",
     stack: ["WinCC OA", "SCADA", "HVAC simulation", "Agile teamwork"],
     accent: "automation",
+    image: "assets/project-accenture.webp",
+    imageTitle: "Accenture SCADA Internship",
+    imageAlt: "Accenture logo",
   },
   {
     id: "fitness-tracker",
-    name: "Workout & Calorie Tracker",
-    type: "Mobile app",
+    name: "Chad Goals",
+    type: "Flutter mobile app",
     summary:
       "A Flutter/Firebase app for exercise logging, weekly performance scoring, calorie tracking, local caching, and a self-hosted nutrition API.",
     stack: ["Flutter", "Dart", "Firebase", "REST APIs", "Caching"],
     accent: "fitness",
+    image: "assets/project-chad-goals.webp",
+    imageTitle: "Chad Goals",
+    imageAlt: "Chad Goals Flutter mobile app screenshot",
   },
   {
     id: "graphics-engine",
@@ -51,6 +63,9 @@ const projects = [
       "A C++ OpenGL engine supporting OBJ/FBX loading, custom GLSL shader pipelines, texture mapping, transforms, and instanced rendering.",
     stack: ["C++", "OpenGL", "GLSL", "3D models", "GPU rendering"],
     accent: "graphics",
+    image: "assets/project-opengl.webp",
+    imageTitle: "OpenGL Graphics Engine",
+    imageAlt: "OpenGL logo",
   },
 ];
 
@@ -279,10 +294,9 @@ function renderProjects() {
     .map(
       (project) => `
         <article class="project-card ${project.accent}">
-          <div class="project-graphic" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
+          <div class="project-graphic">
+            <img src="${project.image}" alt="${project.imageAlt}" loading="lazy" />
+            <span class="project-image-title">${project.imageTitle}</span>
           </div>
           <div class="project-copy">
             <p class="project-type">${project.type}</p>
@@ -306,7 +320,8 @@ function renderProjects() {
           <p class="eyebrow">Selected work</p>
           <h1>Projects with distinct technical stories.</h1>
           <p class="lead">
-            A concise project index for game development, AI security, automation, and web work.
+            A concise project index for game development, AI security, automation, mobile apps,
+            and graphics programming.
           </p>
         </div>
         <div class="project-grid">${cards}</div>
