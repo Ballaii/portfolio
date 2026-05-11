@@ -10,10 +10,10 @@ const projects = [
   {
     id: "divine-harvest",
     name: "Divine Harvest",
-    type: "Metroidvania game",
+    type: "Bachelor's thesis / released game",
     summary:
-      "A large-scale metroidvania focused on exploration, ability progression, responsive combat, and atmospheric level design.",
-    stack: ["Unity", "C#", "Game systems", "Level design", "UI"],
+      "A solo-developed Unity 2D Metroidvania with 20 interconnected areas, 100+ scenes, 15 boss encounters, branching narrative, secure saves, and controller support.",
+    stack: ["Unity", "C#", "Behavior graphs", "AES/HMAC saves", "ScriptableObjects"],
     accent: "harvest",
   },
   {
@@ -29,9 +29,28 @@ const projects = [
     id: "automation",
     name: "Automation and HVAC Simulation",
     type: "Internship work",
-    summary: "Home automation and HVAC simulation development in an agile team environment.",
-    stack: [".NET", "Automation", "Simulation", "Team workflow"],
+    summary:
+      "SCADA internship work modelling heat flow across rooms, insulation, open-window factors, gas/A/C modes, and monthly energy reports from live process data.",
+    stack: ["WinCC OA", "SCADA", "HVAC simulation", "Agile teamwork"],
     accent: "automation",
+  },
+  {
+    id: "fitness-tracker",
+    name: "Workout & Calorie Tracker",
+    type: "Mobile app",
+    summary:
+      "A Flutter/Firebase app for exercise logging, weekly performance scoring, calorie tracking, local caching, and a self-hosted nutrition API.",
+    stack: ["Flutter", "Dart", "Firebase", "REST APIs", "Caching"],
+    accent: "fitness",
+  },
+  {
+    id: "graphics-engine",
+    name: "3D Graphics Engine",
+    type: "Rendering project",
+    summary:
+      "A C++ OpenGL engine supporting OBJ/FBX loading, custom GLSL shader pipelines, texture mapping, transforms, and instanced rendering.",
+    stack: ["C++", "OpenGL", "GLSL", "3D models", "GPU rendering"],
+    accent: "graphics",
   },
 ];
 
@@ -41,9 +60,9 @@ const timeline = [
     place: "Accenture",
     date: "Summer 2025",
     points: [
-      "Built home automation features and simulation tooling.",
-      "Contributed in an agile team with technical planning and delivery.",
-      "Worked on HVAC simulation behavior and practical system testing.",
+      "Developed an HVAC environment simulation in WinCC OA for room-level heat flow.",
+      "Modelled insulation, open-window factors, gas heating, and A/C modes.",
+      "Generated monthly energy expense reports from live process data.",
     ],
   },
   {
@@ -61,19 +80,80 @@ const timeline = [
 const skillGroups = [
   {
     name: "Engineering",
-    items: ["C++", "C#", ".NET", "Python", "Java", "Git"],
+    items: ["C#", "Python", "C", "C++", "Java", "Dart", "SQL", "Git"],
   },
   {
     name: "Game Development",
-    items: ["Unity", "Gameplay systems", "Level design", "UI implementation"],
+    items: ["Unity", "Gameplay systems", "Boss AI", "Level design", "Input systems", "UI"],
   },
   {
     name: "AI and Security",
-    items: ["Neural networks", "Malware analysis", "Data preprocessing", "Model evaluation"],
+    items: ["Neural networks", "Malware analysis", "AES-CBC", "HMAC-SHA256", "Model evaluation"],
   },
   {
-    name: "Product",
-    items: ["Web development", "Flutter", "Agile teamwork", "Community management"],
+    name: "Tools and Platforms",
+    items: ["Flutter", "Firebase", "OpenGL", "Docker", "Bash/Linux", "LaTeX", "REST APIs"],
+  },
+];
+
+const divineHarvestStats = [
+  ["20", "interconnected areas"],
+  ["100+", "Unity scenes"],
+  ["15", "boss encounters"],
+  ["27", "persistent managers"],
+  ["3", "save slots"],
+  ["2", "narrative endings"],
+];
+
+const divineHarvestSystems = [
+  {
+    title: "PersistentObjects Architecture",
+    text:
+      "A DontDestroyOnLoad prefab bootstraps 27 global managers before any scene loads, preserving world, player, map, story, and combat state across 100+ room transitions.",
+  },
+  {
+    title: "Three-Tier Data Model",
+    text:
+      "Static ScriptableObject definitions, persistent runtime managers, and scene-local components stay separated so gameplay data does not collapse into scene lifecycle problems.",
+  },
+  {
+    title: "Secure Save Pipeline",
+    text:
+      "The save system uses AES-CBC encryption, HMAC-SHA256 integrity validation, constant-time comparison, three save slots, and readable metadata for the save UI.",
+  },
+  {
+    title: "Boss AI Evolution",
+    text:
+      "Boss logic evolved from animator-driven coroutines into graph-based Unity Behavior pipelines, with object pooling reducing projectile instantiation overhead.",
+  },
+  {
+    title: "Input Abstraction",
+    text:
+      "Runtime remapping and a 177-entry keybind icon database support keyboard, PlayStation, and Xbox input aliases without hardcoded UI references.",
+  },
+  {
+    title: "Narrative Systems",
+    text:
+      "Branching dialogue, lore items, NPC questlines, a recurring hub, and dual endings tie progression systems to the world fiction.",
+  },
+];
+
+const divineScreenshots = [
+  {
+    src: "assets/divine-harvest-01.webp",
+    alt: "Divine Harvest gameplay screenshot with ornate interior and character platforming",
+  },
+  {
+    src: "assets/divine-harvest-02.webp",
+    alt: "Divine Harvest screenshot showing character dialogue and glowing effects",
+  },
+  {
+    src: "assets/divine-harvest-03.webp",
+    alt: "Divine Harvest cave environment screenshot with purple lighting",
+  },
+  {
+    src: "assets/divine-harvest-04.webp",
+    alt: "Divine Harvest dark red atmospheric boss or story scene",
   },
 ];
 
@@ -85,6 +165,12 @@ function listItems(items) {
 
 function chipList(items) {
   return `<ul class="chip-list">${listItems(items)}</ul>`;
+}
+
+function metricList(items) {
+  return items
+    .map(([value, label]) => `<div><span class="stat">${value}</span><span>${label}</span></div>`)
+    .join("");
 }
 
 function setPage(pageId) {
@@ -141,11 +227,12 @@ function renderHome() {
     <main>
       <section class="page-grid hero-page">
         <div class="hero-copy">
-          <p class="eyebrow">Student developer / game builder</p>
-          <h1>Building games, intelligent tools, and polished web experiences.</h1>
+          <p class="eyebrow">Software developer / game systems builder</p>
+          <h1>Building games, secure systems, AI tools, and graphics projects.</h1>
           <p class="lead">
-            I like learning hard things and turning them into systems people can use. My current
-            focus is game development, AI security, and web projects with clear interfaces.
+            I work across game development, systems programming, industrial automation, AI security,
+            mobile apps, and low-level graphics. My current flagship is Divine Harvest, a released
+            Unity Metroidvania and bachelor's thesis built end to end.
           </p>
           <div class="hero-actions">
             <button type="button" class="primary-action" onclick="setPage('divine-harvest')">
@@ -163,6 +250,17 @@ function renderHome() {
             <span class="signal-value">2026</span>
             <span>Information Technology, UMFST</span>
           </div>
+        </div>
+      </section>
+
+      <section class="content-band compact-band">
+        <div class="metric-strip">
+          ${metricList([
+            ["Unity", "game systems"],
+            ["SCADA", "automation internship"],
+            ["OpenGL", "graphics engine"],
+            ["AI", "malware detection"],
+          ])}
         </div>
       </section>
 
@@ -217,56 +315,99 @@ function renderProjects() {
 }
 
 function renderDivineHarvest() {
+  const screenshotTiles = divineScreenshots
+    .map(
+      (shot, index) => `
+        <figure class="screenshot-tile tile-${index + 1}">
+          <img src="${shot.src}" alt="${shot.alt}" loading="lazy" />
+        </figure>`,
+    )
+    .join("");
+
+  const systems = divineHarvestSystems
+    .map(
+      (system) => `
+        <article>
+          <h2>${system.title}</h2>
+          <p>${system.text}</p>
+        </article>`,
+    )
+    .join("");
+
   return `
     <main>
       <section class="game-page">
         <div class="game-hero">
-          <div class="game-art" aria-hidden="true">
-            <div class="sun"></div>
-            <div class="temple"></div>
-            <div class="platform platform-a"></div>
-            <div class="platform platform-b"></div>
-            <div class="player-silhouette"></div>
+          <div class="screenshot-collage" aria-label="Divine Harvest screenshot collage">
+            ${screenshotTiles}
           </div>
           <div class="game-copy">
-            <p class="eyebrow">Flagship game project</p>
+            <p class="eyebrow">Released Windows game / bachelor's thesis</p>
             <h1>Divine Harvest</h1>
             <p class="lead">
-              A metroidvania built around atmospheric exploration, ability-gated progression,
-              responsive encounters, and a world that rewards curiosity.
+              A solo-developed 2D Metroidvania built in Unity over roughly eight months, released
+              on itch.io as a university final project and documented in a 99-page thesis.
             </p>
-            <div class="stat-row">
-              <div><span class="stat">Unity</span><span>Engine</span></div>
-              <div><span class="stat">C#</span><span>Gameplay</span></div>
-              <div><span class="stat">2D</span><span>Metroidvania</span></div>
+            <div class="game-actions">
+              <a class="primary-action" href="https://ballaii.itch.io/divine-harvest" target="_blank" rel="noopener">
+                Play on itch.io
+              </a>
+              <a class="secondary-action" href="https://www.youtube.com/watch?v=65rzQu2B-PM" target="_blank" rel="noopener">
+                Watch trailer
+              </a>
             </div>
           </div>
         </div>
 
-        <div class="feature-grid">
-          <article>
-            <h2>Core Direction</h2>
-            <p>
-              Divine Harvest gets its own space because it is the largest creative and technical
-              project in the portfolio. The page frames it as a serious game system, not just a
-              hobby entry.
-            </p>
-          </article>
-          <article>
-            <h2>Systems Focus</h2>
-            <p>
-              Movement, combat, progression, UI, save flow, enemy behavior, and level structure can
-              all be expanded here as the project grows.
-            </p>
-          </article>
-          <article>
-            <h2>Portfolio Value</h2>
-            <p>
-              Recruiters and collaborators can quickly see the stack, scope, and design thinking
-              behind the game before looking at the rest of the site.
-            </p>
-          </article>
+        <div class="stat-row stat-row-wide">
+          ${metricList(divineHarvestStats)}
         </div>
+
+        <section class="media-section">
+          <div class="section-heading wide">
+            <p class="eyebrow">Trailer</p>
+            <h2>Watch the Divine Harvest trailer.</h2>
+          </div>
+          <div class="video-frame">
+            <iframe
+              src="https://www.youtube.com/embed/65rzQu2B-PM"
+              title="Divine Harvest trailer"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
+          </div>
+        </section>
+
+        <section class="content-band">
+          <div class="section-heading wide">
+            <p class="eyebrow">Systems</p>
+            <h2>Engineering choices behind the world.</h2>
+            <p class="lead">
+              The thesis frames Divine Harvest as an end-to-end architecture problem: persistent
+              world state, ability-gated progression, AI encounters, secure saves, input abstraction,
+              and narrative branching all have to survive constant scene transitions.
+            </p>
+          </div>
+          <div class="feature-grid systems-grid">${systems}</div>
+        </section>
+
+        <section class="content-band">
+          <div class="release-panel">
+            <div>
+              <p class="eyebrow">Release</p>
+              <h2>Available as a downloadable Windows game.</h2>
+              <p>
+                The itch page lists Divine Harvest as a released Adventure game for Windows with
+                Action-Adventure, Indie, Metroidvania, Pixel Art, Short, and Singleplayer tags.
+                It also notes controller support for walking through the game.
+              </p>
+            </div>
+            <a class="primary-action" href="https://ballaii.itch.io/divine-harvest" target="_blank" rel="noopener">
+              Open itch.io page
+            </a>
+          </div>
+        </section>
       </section>
     </main>`;
 }
